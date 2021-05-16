@@ -1,7 +1,7 @@
-import {Sequelize} from 'sequelize-typescript';
-import {config} from './config';
+import { Sequelize } from 'sequelize-typescript';
+import { config } from './config';
 
-let sequelizeInstance : Sequelize;
+let sequelizeInstance: Sequelize;
 
 if (config.isProduction) {
 	sequelizeInstance = new Sequelize(config.database, config.username, config.password, {
@@ -10,7 +10,7 @@ if (config.isProduction) {
 } else {
 	sequelizeInstance = new Sequelize({
 		dialect: 'sqlite',
-		storage: '../../../database.sqlite'
+		storage: './database.sqlite'
 	});
 }
 

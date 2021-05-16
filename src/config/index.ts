@@ -15,8 +15,10 @@ export const config = {
   'jwt': {
     'secret': process.env.JWT_SECRET ?? "",
 	},
-	'mail_api_key': process.env.MAIL_API_KEY ?? "",
-	'mail_domain': process.env.MAIL_DOMAIN ?? "",
+	'mail_username': process.env.MAIL_USERNAME ?? "",
+	'mail_password': process.env.MAIL_PASSWORD ?? "",
+	'mail_host': process.env.MAIL_HOST ?? "",
+	'mail_port': process.env.MAIL_PORT ?? "",
 	'mail_from': process.env.MAIL_FROM ?? "",
 	isProduction
 };
