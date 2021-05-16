@@ -36,3 +36,4 @@ node_modules
 venv/
 set_env.sh
 secret.yaml
+database.sqlite
