@@ -2,7 +2,7 @@
 
 ## Description
 
-The project impalements a RESTFUL Post API using Node.js (TypeScript), Express Framework and Sequelize ORM.
+This project impalements a RESTFUL Post API using Node.js (TypeScript), Express Framework and Sequelize ORM.
 
 Available Endpoints are
 -  /posts
@@ -27,16 +27,17 @@ Available Endpoints are
 
 - [Database Relationship](#database-relationship)
 - [System Setup](#system-setup)
-- [Installation](#installation)
 - [Documentation](#documentation)
 
 ### Database Relationship
 
+![Database Image](https://github.com/olaysco/node-post-api/blob/develop/er.png?raw=true)
+
 These are the database relationships:
 
-1. A user can have multiple post.
-2. A post can have multiple replies.
-4. A post can have a reaction(like or love) from a user.
+1. A User can have multiple post.
+2. A Post can have multiple replies(Same Post model).
+4. A Post can have a reaction(like or love) from a user, this can also be easily extended to other types of reaction
 
 ### System Setup
 
@@ -59,7 +60,7 @@ Create a new mysql database or set environment to develop, to use sqlite
 #### Step 3: Setup environment variables
 
 ```bash 
-	cp .env.example .env
+cp .env.example .env
 ```
 Setup your Database configuration and other necessary configuration
 
