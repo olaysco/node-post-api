@@ -5,6 +5,7 @@ import sequelize from './sequelize';
 import { config } from './config';
 import router from './http/routes/index';
 import { MODELS } from './models/index';
+import { MediaRouter } from './http/routes/media';
 
 const server = async () => {
 	await sequelize.addModels(MODELS);
@@ -27,6 +28,7 @@ const server = async () => {
 	}));
 
 	app.use('/api/v1/', router);
+	app.use('/uploads', MediaRouter);
 
 	// Start the Server
 	app.listen(port, () => {

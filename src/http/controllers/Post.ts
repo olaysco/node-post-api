@@ -1,3 +1,5 @@
+import fs from 'fs';
+import { config } from '../../config'
 import { Request, Response } from 'express';
 import { Post as Model, PostAttributes } from '../../models/Post';
 import { Controller } from './Controller';
@@ -59,11 +61,21 @@ class Post extends Controller {
 				return res.status(400).send({ message: "Post body is required", success: false });
 			}
 
+			if (!req.file || req.file.mimetype !== 'image/jpeg') {
+				return res.status(400).send({ message: "Post Image cover must be of type image/jpeg", success: false });
+			}
+
+			const fileName = req.file.path + '.jpg';
+
 			const data = await Model.create({
 				userId: req.body.decoded.id,
 				title: title ?? "",
 				body,
+				cover: req.file.filename + '.jpg'
 			})
+
+			fs.renameSync(req.file.path, fileName);
+
 			return res.status(201).send({ data: data.toJSON(), message: "Post successfully posted", success: true });
 		} catch (err: any) {
 			return res.status(500).send({
@@ -270,6 +282,13 @@ class Post extends Controller {
 		}
 	}
 
+	/**
+	 * Find a Post model or return a 404 error
+	 * 
+	 * @param pk any
+	 * @param res Response
+	 * @returns Promise<Model | undefined>
+	 */
 	public static async findOrFailByPk(pk: any, res: Response): Promise<Model | undefined> {
 		const model = await Model.findByPk(pk);
 		if (model) {
@@ -286,13 +305,14 @@ class Post extends Controller {
 	 * Transform instances of Posts to Array
 	 * 
 	 * @param posts: { rows: Model[]; count: number }
-	 */	
+	 */
 	public static transform(posts: { rows: Model[]; count: number }): Model[] {
 		let results: Model[] = []
 		posts.rows.forEach((post) => {
 			post = post.get({ plain: true })
 			post.likes = 0;
 			post.loves = 0;
+			post.cover = `${config.url}/uploads/${post.cover}`
 			post.reactions.map(react => {
 				switch (react.type) {
 					case ReactionType.Like:

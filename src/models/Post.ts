@@ -31,6 +31,9 @@ export class Post extends Model {
 	public body!: string;
 
 	@Column
+	public cover!: string;
+
+	@Column
 	@ForeignKey(() => Post)
 	public parentId!: number;
 
@@ -54,12 +57,14 @@ export interface PostModel {
 	userId: number;
 	title: string | null;
 	body: string | null;
+	cover: string | null;
 }
 
 export const PostAttributes: any = [
 	"id",
 	"title",
 	"body",
+	"cover",
 	"userId",
 	"createdAt",
 	"updatedAt",
@@ -80,6 +85,11 @@ Post.init(
 		},
 
 		title: {
+			type: DataType.STRING,
+			allowNull: true,
+		},
+
+		cover: {
 			type: DataType.STRING,
 			allowNull: true,
 		},

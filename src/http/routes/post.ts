@@ -1,12 +1,14 @@
-import {Router} from 'express';
+import multer from 'multer';
+import { Router } from 'express';
 import Post from '../controllers/Post';
 import { requireAuth } from '../middlewares';
+const upload = multer({ dest: 'uploads/' })
 
 const router: Router = Router();
 
 router.get('/:id', Post.get);
 router.get('/', Post.index);
-router.post('/', requireAuth, Post.store);
+router.post('/', upload.single('cover'), requireAuth, Post.store);
 router.patch('/:id', requireAuth, Post.update);
 router.delete('/:id', requireAuth, Post.delete);
 router.put('/:id/reply', requireAuth, Post.reply);
