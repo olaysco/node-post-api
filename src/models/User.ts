@@ -2,7 +2,7 @@ import {Table, Column, Model, PrimaryKey, CreatedAt, UpdatedAt, HasMany, AutoInc
 import { Post } from './Post';
 
 @Table
-export class User extends Model<User> {
+export class User extends Model{
 
 	@PrimaryKey
 	@AutoIncrement

@@ -36,7 +36,7 @@ export abstract class Controller {
 	 * @param data 
 	 * @returns {item: Model; created: boolean}
 	 */
-	public static updateOrCreate(model: Model<any>, where: any, data: any): { item: Model; created: boolean} {
+	public static updateOrCreate(model: any, where: any, data: any): { item: Model; created: boolean } {
 		return model.findOne({ where })
 			.then(function (foundItem: Model) {
 				if (!foundItem) {
@@ -46,7 +46,7 @@ export abstract class Controller {
 				}
 				return model
 					.update(data, { where })
-					.then(function (item) { return { item: item, created: false } });
+					.then(function (item: any) { return { item: item, created: false } });
 			});
 	}
 }

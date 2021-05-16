@@ -2,7 +2,8 @@ import multer from 'multer';
 import { Router } from 'express';
 import Post from '../controllers/Post';
 import { requireAuth } from '../middlewares';
-const upload = multer({ dest: 'uploads/' })
+import { config } from '../../config';
+const upload = multer({ dest: `${config.rootUpload}/` })
 
 const router: Router = Router();
 

@@ -2,6 +2,7 @@ require('dotenv').config()
 const isProduction = process.env.ENVIRONMENT?.toLowerCase() === "production"
 
 export const config = {
+	'rootUpload': process.env.ROOT_UPLOAD ?? "uploads",
 	'env': process.env.ENVIRONMENT ?? "develop",
   'username': process.env.MYSQL_USERNAME ?? "",
   'password': process.env.MYSQL_PASSWORD ?? "",

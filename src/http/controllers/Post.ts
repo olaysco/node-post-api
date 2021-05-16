@@ -39,7 +39,7 @@ class Post extends Controller {
 				totalPage: Post.totalPage(posts.count, Number(size ?? 15)),
 				success: true,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			res.status(500).send({
 				message: err.message,
 				success: false,
@@ -57,7 +57,7 @@ class Post extends Controller {
 	public async store(req: Request, res: Response): Promise<any> {
 		try {
 			const { title, body } = req.body;
-			if (!body) {
+			if (!body || body.length < 1) {
 				return res.status(400).send({ message: "Post body is required", success: false });
 			}
 
@@ -77,7 +77,7 @@ class Post extends Controller {
 			fs.renameSync(req.file.path, fileName);
 
 			return res.status(201).send({ data: data.toJSON(), message: "Post successfully posted", success: true });
-		} catch (err: any) {
+		} catch (err) {
 			return res.status(500).send({
 				message: `unable to create post because, ${err.message}`,
 				success: false,
@@ -110,7 +110,7 @@ class Post extends Controller {
 			});
 
 
-		} catch (err: any) {
+		} catch (err) {
 			return res.status(500).send({
 				message: err.message,
 				success: false,
@@ -145,7 +145,7 @@ class Post extends Controller {
 				message: 'Post not found',
 				success: false,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			return res.status(500).send({
 				message: err.message,
 				success: false,
@@ -175,7 +175,7 @@ class Post extends Controller {
 				message: 'Post not found',
 				success: false,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			return res.status(500).send({
 				message: err.message,
 				success: false,
@@ -211,7 +211,7 @@ class Post extends Controller {
 				return res.status(201).send({ data, message: "Reply successfully posted", success: true });
 			}
 			return;
-		} catch (err: any) {
+		} catch (err) {
 			return res.status(500).send({
 				message: err.message,
 				success: false,
@@ -247,7 +247,7 @@ class Post extends Controller {
 				return res.status(201).send({ data, message: "Reaction recorded successfully", success: true });
 			}
 			return;
-		} catch (err: any) {
+		} catch (err) {
 			return res.status(500).send({
 				message: err.message,
 				success: false,
@@ -265,7 +265,11 @@ class Post extends Controller {
 	public async unReact(req: Request, res: Response): Promise<any> {
 		try {
 			const { id } = req.params;
-			const reaction = await Reaction.findOne({ where: { id, userId: req.body.decoded.id } });
+			const post = await Post.findOrFailByPk(id, res);
+			if (!post) {
+				return
+			}
+			const reaction = await Reaction.findOne({ where: { postId: post.id, userId: req.body.decoded.id } });
 			if (reaction) {
 				await reaction.destroy();
 				return res.status(201).send({ message: "Reaction removed", success: true });
@@ -274,7 +278,7 @@ class Post extends Controller {
 				message: 'Reaction not found',
 				success: false,
 			});
-		} catch (err: any) {
+		} catch (err) {
 			return res.status(500).send({
 				message: err.message,
 				success: false,
@@ -312,7 +316,6 @@ class Post extends Controller {
 			post = post.get({ plain: true })
 			post.likes = 0;
 			post.loves = 0;
-			post.cover = `${config.url}/uploads/${post.cover}`
 			post.reactions.map(react => {
 				switch (react.type) {
 					case ReactionType.Like:

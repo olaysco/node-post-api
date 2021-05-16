@@ -43,6 +43,7 @@ class SendEmail {
 	static getTransport(): Transporter {
 		if (!this.transport) {
 			this.transport = nodemailer.createTransport({
+				// @ts-expect-error ignore non-matching TransportOptions
 				host: config.mail_host,
 				port: config.mail_password,
 				auth: {

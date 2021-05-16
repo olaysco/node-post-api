@@ -1,4 +1,5 @@
 import { Table, Model, DataType, Column, ForeignKey, HasMany, PrimaryKey, AutoIncrement, BelongsTo, DefaultScope } from 'sequelize-typescript';
+import { config } from '../config';
 import sequelize from '../sequelize';
 import { Reaction } from './Reaction';
 
@@ -30,7 +31,12 @@ export class Post extends Model {
 	@Column
 	public body!: string;
 
-	@Column
+	@Column({
+		get(this: Post): any {
+			const url = `${config.url}/${config.rootUpload}/${this.getDataValue('cover')}`; 
+			return url;
+		},
+	})
 	public cover!: string;
 
 	@Column
