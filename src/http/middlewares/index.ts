@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import { NextFunction } from "connect";
 import { Request, Response } from 'express'
 
-export function requireAuth(req: Request, res: Response, next: NextFunction) {
+export function requireAuth(req: Request, res: Response, next: NextFunction): any {
 	if (!req.headers || !req.headers.authorization) {
 		return res.status(401).send({ message: 'No authorization headers.' });
 	}

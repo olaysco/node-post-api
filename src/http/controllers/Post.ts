@@ -6,7 +6,14 @@ import { ReactionType } from '../../models/ReactionType';
 
 class Post extends Controller {
 
-	public async index(req: Request, res: Response) {
+	/**
+	 * Gets all instances of the Post model
+	 * 
+	 * @param req: Request
+	 * @param res: Response
+	 * @return Promise<any>
+	 */
+	public async index(req: Request, res: Response): Promise<any> {
 		try {
 			const { page, size, ...rest } = req.query;
 			const posts = await Model.findAndCountAll({
@@ -38,14 +45,21 @@ class Post extends Controller {
 		}
 	}
 
-	public async store(req: Request, res: Response) {
+	/**
+	 * Creates a new instance of the Post model
+	 * 
+	 * @param req: Request
+	 * @param res: Response
+	 * @return Promise<any>
+	 */
+	public async store(req: Request, res: Response): Promise<any> {
 		try {
 			const { title, body } = req.body;
 			if (!body) {
 				return res.status(400).send({ message: "Post body is required", success: false });
 			}
 
-			let data = await Model.create({
+			const data = await Model.create({
 				userId: req.body.decoded.id,
 				title: title ?? "",
 				body,
@@ -59,10 +73,16 @@ class Post extends Controller {
 		}
 	}
 
-	public async get(req: Request, res: Response) {
+	/**
+	 * Gets a single Post model by id
+	 * 
+	 * @param req: Request
+	 * @param res: Response
+	 * @return Promise<any>
+	 */
+	public async get(req: Request, res: Response): Promise<any> {
 		try {
 			const { id } = req.params;
-			const { page, size, ...rest } = req.query;
 			const post = await Model.findByPk(id);
 
 			if (post) {
@@ -86,7 +106,14 @@ class Post extends Controller {
 		}
 	}
 
-	public async update(req: Request, res: Response) {
+	/**
+	 * Updates a single Post model by id
+	 * 
+	 * @param req: Request
+	 * @param res: Response
+	 * @return Promise<any>
+	 */
+	public async update(req: Request, res: Response): Promise<any> {
 		try {
 			const { id } = req.params;
 			const { title, body } = req.body;
@@ -114,7 +141,14 @@ class Post extends Controller {
 		}
 	}
 
-	public async delete(req: Request, res: Response) {
+	/**
+	 * Deletes a single Post model by id
+	 * 
+	 * @param req: Request
+	 * @param res: Response
+	 * @return Promise<any>
+	 */
+	public async delete(req: Request, res: Response): Promise<any> {
 		try {
 			const { id } = req.params;
 			const post = await Model.findByPk(id);
@@ -137,7 +171,14 @@ class Post extends Controller {
 		}
 	}
 
-	public async reply(req: Request, res: Response) {
+	/**
+	 * Reply to a Post, and only top level post can be updated
+	 * 
+	 * @param req: Request
+	 * @param res: Response
+	 * @return Promise<any>
+	 */
+	public async reply(req: Request, res: Response): Promise<any> {
 		try {
 			const { id } = req.params;
 			const { body } = req.body;
@@ -166,7 +207,16 @@ class Post extends Controller {
 		}
 	}
 
-	public async react(req: Request, res: Response) {
+	/**
+	 * React to a Post,
+	 * 1 for like
+	 * 2 for love
+	 * 
+	 * @param req: Request
+	 * @param res: Response
+	 * @return Promise<any>
+	 */
+	public async react(req: Request, res: Response): Promise<any> {
 		try {
 			const { reaction } = req.body;
 			const { id } = req.params;
@@ -193,7 +243,14 @@ class Post extends Controller {
 		}
 	}
 
-	public async unReact(req: Request, res: Response) {
+	/**
+	 * Delete Reaction to a Post
+	 * 
+	 * @param req: Request
+	 * @param res: Response
+	 * @return Promise<any>
+	 */
+	public async unReact(req: Request, res: Response): Promise<any> {
 		try {
 			const { id } = req.params;
 			const reaction = await Reaction.findOne({ where: { id, userId: req.body.decoded.id } });
@@ -225,7 +282,12 @@ class Post extends Controller {
 		return;
 	}
 
-	public static transform(posts: { rows: Model[]; count: number }) {
+	/**
+	 * Transform instances of Posts to Array
+	 * 
+	 * @param posts: { rows: Model[]; count: number }
+	 */	
+	public static transform(posts: { rows: Model[]; count: number }): Model[] {
 		let results: Model[] = []
 		posts.rows.forEach((post) => {
 			post = post.get({ plain: true })

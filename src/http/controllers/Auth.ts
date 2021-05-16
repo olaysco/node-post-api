@@ -7,7 +7,15 @@ import * as EmailValidator from 'email-validator';
 import { Op } from 'sequelize';
 
 class Auth extends Controller {
-	public async register(req: Request, res: Response) {
+
+	/**
+	 * Registers a new user
+	 * 
+	 * @param req Request
+	 * @param res Response
+	 * @returns Promise<Response<any, Record<string, any>>>
+	 */
+	public async register(req: Request, res: Response): Promise<Response<any, Record<string, any>>> {
 		const email = req.body.email;
 		const plainTextPassword = req.body.password;
 
@@ -33,13 +41,21 @@ class Auth extends Controller {
 
 		const savedUser = await newUser.save();
 
-		await SendEmail.sendWelcomeEmail(email);
+		//Allow response to be sent to user without waiting for email
+		SendEmail.sendWelcomeEmail(email);
 
 		const jwt = Service.generateJWT(savedUser.short());
-		res.status(201).send({ token: jwt, user: savedUser.short() });
+		return res.status(201).send({ token: jwt, user: savedUser.short() });
 	}
 
-	public async login(req: Request, res: Response) {
+	/**
+	 * Authenticate a new user
+	 * 
+	 * @param req Request
+	 * @param res Response
+	 * @returns Promise<Response<any, Record<string, any>>>
+	 */
+	public async login(req: Request, res: Response): Promise<Response<any, Record<string, any>>> {
 		const email = req.body.email;
 		const password = req.body.password;
 
@@ -64,10 +80,17 @@ class Auth extends Controller {
 		}
 
 		const jwt = Service.generateJWT(user.short());
-		res.status(200).send({ auth: true, token: jwt, user: user.short() });
+		return res.status(200).send({ auth: true, token: jwt, user: user.short() });
 	}
 
-	public async resetPassword(req: Request, res: Response) {
+	/**
+	 * Authorizes a user for password reset
+	 * 
+	 * @param req Request
+	 * @param res Response
+	 * @returns Promise<any>
+	 */
+	public async resetPassword(req: Request, res: Response): Promise<any> {
 		try {
 			const email = req.body.email;
 
@@ -79,6 +102,7 @@ class Auth extends Controller {
 			if (user) {
 				const token = await Service.generateJWT(user.short(), "1h");
 				await SendEmail.SendResetEmail(email, req.hostname, token);
+
 				return res.status(200).send({
 					success: true,
 					message:
@@ -93,10 +117,24 @@ class Auth extends Controller {
 		}
 	}
 
+	/**
+	 * Verify a user is authorized to perform an action
+	 * 
+	 * @param req Request
+	 * @param res Response
+	 * @returns Promise<Response>
+	 */
 	public async verify(req: Request, res: Response): Promise<Response> {
 		return res.status(200).send({ auth: true, message: 'Authenticated.' });
 	}
 
+	/**
+	 * Updates users password
+	 * 
+	 * @param req Request
+	 * @param res Response
+	 * @returns Promise<Response>
+	 */
 	public async updatePassword(req: Request, res: Response): Promise<Response> {
 		const email = req.body.email;
 		const newPassword = req.body.newPassword;
