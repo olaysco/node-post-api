@@ -1,0 +1,712 @@
+{
+	"info": {
+		"_postman_id": "718d1eaa-9a2a-4634-a2b7-ece00c89206a",
+		"name": "PostApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "Register",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"olhayiwo@gmail.com\",\r\n    \"password\": \"samloco\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/users/auth",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"auth"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9saGF5aXdvQGdtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE2MjExNzA3ODYsImV4cCI6MTYyMTI1NzE4Nn0.CIH38PvFPDG3jZaheGZJyJyXVhEM4x1NLGdDP45qNBg\",\r\n    \"user\": {\r\n        \"email\": \"olhayiwo@gmail.com\",\r\n        \"id\": 1\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"olhayiwo@gmail.com\",\r\n    \"password\": \"samloco\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/users/auth/login",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "Create Post",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cover",
+									"type": "file",
+									"src": "/C:/Users/HP/Pictures/20180415_111905.jpg"
+								},
+								{
+									"key": "body",
+									"value": "Kolo",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "sam tos",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/posts",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\"data\":{\"cover\":\"http://localhost/uploads/497b3e0548f46c007ff19ce7d3cbf037.jpg\",\"id\":1,\"userId\":1,\"title\":\"sam tos\",\"body\":\"Kolo\",\"updatedAt\":\"2021-05-16T13:14:50.904Z\",\"createdAt\":\"2021-05-16T13:14:50.904Z\"},\"message\":\"Post successfully posted\",\"success\":true}"
+				}
+			]
+		},
+		{
+			"name": "Update Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "Update Post",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"body\": \"Post mooslelel tleleel klkl ds\",\r\n    \"title\": \"pos kkkty\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/posts/1",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "307"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"133-Gw/2U0MdLQRix/vfR+1e1YBgr6Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 13:15:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"cover\": \"http://localhost/uploads/497b3e0548f46c007ff19ce7d3cbf037.jpg\",\n        \"id\": 1,\n        \"userId\": 1,\n        \"title\": \"pos kkkty\",\n        \"body\": \"Post mooslelel tleleel klkl ds\",\n        \"parentId\": null,\n        \"createdAt\": \"2021-05-16T13:14:50.000Z\",\n        \"updatedAt\": \"2021-05-16T13:15:29.561Z\",\n        \"user\": {\n            \"email\": \"olhayiwo@gmail.com\"\n        }\n    },\n    \"success\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "All Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "All Posts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/posts",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "381"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"17d-/05UDkOHfQGEcjN9Mj7N8b4BJgk\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 13:15:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"count\": 1,\n    \"data\": [\n        {\n            \"cover\": \"http://localhost/uploads/497b3e0548f46c007ff19ce7d3cbf037.jpg\",\n            \"id\": 1,\n            \"title\": \"pos kkkty\",\n            \"body\": \"Post mooslelel tleleel klkl ds\",\n            \"userId\": 1,\n            \"createdAt\": \"2021-05-16T13:14:50.000Z\",\n            \"updatedAt\": \"2021-05-16T13:15:29.000Z\",\n            \"user\": {\n                \"email\": \"olhayiwo@gmail.com\"\n            },\n            \"replies\": [],\n            \"reactions\": [],\n            \"likes\": 0,\n            \"loves\": 0\n        }\n    ],\n    \"currentPage\": 1,\n    \"totalPage\": 1,\n    \"success\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Single Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "Single Post",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/posts/1",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "307"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"133-bhbOz70Y8ylcnk41Kay3fWBi13M\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 13:16:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"cover\": \"http://localhost/uploads/497b3e0548f46c007ff19ce7d3cbf037.jpg\",\n        \"id\": 1,\n        \"userId\": 1,\n        \"title\": \"pos kkkty\",\n        \"body\": \"Post mooslelel tleleel klkl ds\",\n        \"parentId\": null,\n        \"createdAt\": \"2021-05-16T13:14:50.000Z\",\n        \"updatedAt\": \"2021-05-16T13:15:29.000Z\",\n        \"user\": {\n            \"email\": \"olhayiwo@gmail.com\"\n        }\n    },\n    \"success\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reply Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "Reply Post",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"body\": \"Shi Post fff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/posts/1/reply",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"1",
+								"reply"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "239"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ef-MNKTcnGtRdjjsYIaLjgwLKqtEIc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 13:16:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"cover\": \"http://localhost/uploads/undefined\",\n        \"id\": 2,\n        \"userId\": 1,\n        \"body\": \"Shi Post fff\",\n        \"parentId\": 1,\n        \"updatedAt\": \"2021-05-16T13:16:24.236Z\",\n        \"createdAt\": \"2021-05-16T13:16:24.236Z\"\n    },\n    \"message\": \"Reply successfully posted\",\n    \"success\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "React to Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "React to Post (1 for like)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reaction\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/posts/1/react",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"1",
+								"react"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-uCK5pkTrmZDTLUyZvU0aTBQ7tMc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 13:21:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {},\n    \"message\": \"Reaction recorded successfully\",\n    \"success\": true\n}"
+				},
+				{
+					"name": "React to Post(2 for love)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reaction\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/posts/1/react",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"1",
+								"react"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-uCK5pkTrmZDTLUyZvU0aTBQ7tMc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 13:21:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {},\n    \"message\": \"Reaction recorded successfully\",\n    \"success\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Remove Reaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "Remove Reaction from Post",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/api/v1/posts/1/react",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"1",
+								"react"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2d-J8kqBnYDagWmkV2nxj5IjJJLNTU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 May 2021 13:22:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Reaction removed\",\n    \"success\": true\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APP_URL",
+			"value": "http://localhost:8000"
+		}
+	]
+}

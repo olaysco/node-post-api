@@ -8,6 +8,7 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
+.env
 
 .idea/
 .ionic/
@@ -26,6 +27,7 @@ plugins/ios.json
 $RECYCLE.BIN/
 postgres_dev/
 logfile
+uploads/
 
 .DS_Store
 Thumbs.db
